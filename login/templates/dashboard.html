@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<h1>Welcome,{{user.username}}</h1>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="POST" class="post-form">
+	{% csrf_token %}
+		<!-- {{ form.as_p }} -->
+		
+	
+  <div class="container">
+    <label for="fname"><b>Name:</b></label>
+    <input type="text" placeholder="Enter Your Name" name="firstname" required><br>
+    <br>
+    <label for="fname"><b>Updated Name:</b></label>
+    <input type="text" placeholder="Enter Your Updated Name" name="firstname" required><br>
+    <br>
+    <label for="psw"><b>Password:</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required><br>
+    <br>
+    <label for="psw-repeat"><b>Repeat Password:</b></label>
+    <input type="password" placeholder="Repeat Password" name="psw-repeat" required><br>
+    <br>
+<!--     <label for="img"><b>Select image:</b></label>
+    <input type="file" id="img" name="img" accept="image/*">
+    <br> -->
+    <br>
+    <div class="clearfix">
+      <button type="submit" class="btn btn-succes">Update Details</button>
+    </div>
+  </div>
+</form>
+
+</body>
+</html>
+
+{% endblock %}
