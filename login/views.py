@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .forms import ImageForm
 
+from .models import Image
+
 
 def indexView(request):
 	return render(request,'index.html')
@@ -46,3 +48,4 @@ def image_upload_view(request):
 	else:
 		form=ImageForm()
 	return render(request,'registration/upload.html',{'form':form})
+
