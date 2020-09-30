@@ -6,6 +6,8 @@ from .forms import ImageForm
 
 from .models import Image
 
+from django.views.generic import TemplateView 
+
 
 def indexView(request):
 	return render(request,'index.html')
@@ -50,8 +52,4 @@ def image_upload_view(request):
 	return render(request,'registration/upload.html',{'form':form})
 
 def home(request):
-	if request.method=="POST":
-		form=PostForm(request.POST, instance=post)
-		if form.is_valid():
-			post.save()
-			return redirect('home.html')
+	return render(request, 'templates/home.html')

@@ -50,12 +50,14 @@ def post_detail(request,slug):
 	post=Post.objects.get(slug=slug)
 	return render(request, 'blog/post_detail.html',{'post':post})
 
-class AddCategoryView(CreateView):
+class AddCategoryView():
 	model=Category
 	template_name='blog/add_category.html'
 	fields='__all__'
 
 def CategoryView(request, cats):
 	category_posts=Post.objects.filter(category=cats)
-	return render(request,'blog/categories.html',{'cats':cats.title(), 'category_posts';category_posts})		
+	return render(request,'blog/categories.html',{'cats':cats.title(), 'category_posts':category_posts})		
 
+def home(request):
+	return render(request, 'home.html')

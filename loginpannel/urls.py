@@ -16,17 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-#below line is added from  djangocentral
+
 from django.conf import settings
 from django.conf.urls.static import static
-# from . import views
+
 
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
-    
     path('login/',include('login.urls')),
     path('polls/',include('polls.urls')),
+    # path('blog/',include('blog.urls')),
+    path('',include('blog.urls')),
    
 ]
 if settings.DEBUG:
