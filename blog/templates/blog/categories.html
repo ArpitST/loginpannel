@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% if category_posts %}
+
+<h1>{{ cats }}</h1>
+
+<ul>
+{% for post in category_posts %}
+	{{}}
+{% endfor %}
+</ul>
+
+{% else %}
+	<h2>Sorry, this page doesn't exist</h2>
+{% endif %}
+
+{% endblock %}
+
+
+
+<!-- for rest prefer this link https://www.youtube.com/watch?v=PTsljbR-Cmo -->

@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Post
+from .models import Post, Category
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 from django.shortcuts import redirect
+
 # Create your views here.
 # def post_list(request):
 # 	posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -48,3 +49,13 @@ def post_list(request):
 def post_detail(request,slug):
 	post=Post.objects.get(slug=slug)
 	return render(request, 'blog/post_detail.html',{'post':post})
+
+class AddCategoryView(CreateView):
+	model=Category
+	template_name='blog/add_category.html'
+	fields='__all__'
+
+def CategoryView(request, cats):
+	category_posts=Post.objects.filter(category=cats)
+	return render(request,'blog/categories.html',{'cats':cats.title(), 'category_posts';category_posts})		
+
