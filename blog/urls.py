@@ -2,9 +2,7 @@ from django.urls import path
 from .import views
 
 urlpatterns=[
-	path('<slug:slug>/',views.post_detail, name="post_detail"),
-	path('',views.home,name="home"),
-	# path('add_category/', AddCategoryView.as_view(), name='add_category'),
-	# path('category/<str:cats>/', CategoryView, name='category'),
-
+	path('post_detail/<int:pk>/',views.post_detail, name="post_detail"),
+	path('post_edit/<int:pk>/',views.post_edit, name="post_edit"),
+	path('',views.post_list,name="post_list"),
 ]

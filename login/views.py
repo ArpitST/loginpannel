@@ -51,5 +51,3 @@ def image_upload_view(request):
 		form=ImageForm()
 	return render(request,'registration/upload.html',{'form':form})
 
-def home(request):
-	return render(request, 'templates/home.html')
