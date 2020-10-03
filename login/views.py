@@ -51,3 +51,5 @@ def image_upload_view(request):
 		form=ImageForm()
 	return render(request,'registration/upload.html',{'form':form})
 
+
+# https://tutorial-extensions.djangogirls.org/en/homework_create_more_models/ prefer this for comment post
