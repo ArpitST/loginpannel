@@ -21,6 +21,7 @@ class Post(models.Model):
 	
 	category=models.CharField(max_length=200, default='coding')
 
+	tags=models.ManyToManyField('Tag', blank=True, related_name='posts')
 
 	def publish(self):
 		self.published_date=timezone.now()
@@ -50,4 +51,13 @@ class Comment(models.Model):
 
 	def approved_comments(self):
 		return self.comments.filter(approved_comments=True)
+
+class Tag(models.Model):
+	title=models.CharField(max_length=150)
+
+	def __str__(self):
+		return self.title
+
+	def get_absolute_url(self):
+		return reverse('blog/tag_detail_url', kwargs={'slug':self.slug})
 		

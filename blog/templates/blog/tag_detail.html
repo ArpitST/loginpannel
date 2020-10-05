@@ -1,0 +1,28 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+
+	"{{ tag.title }}" posts {{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+	
+	<h1 class="mt-5">
+		Post with "{{ tag.title }}" tag
+	</h1>
+
+	{% for post in tag.posts.all %}
+		<div class="card mb-4">
+			<div class="card-header">
+				{{ post.date_pub }}
+			</div>
+			<div class="card-body">
+				<a class="card-title">{{ post.title }}</a>
+				<a class="card-text">{{ post.body|truncatewords:15}}</a>
+				<a href="{{ post.get_absolute_url }}" class="btn btn-light">Read</a>
+			</div>
+		</div>
+	{% endfor %}
+	
+{% endblock %}
