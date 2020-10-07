@@ -26,3 +26,10 @@ class CommentForm(forms.ModelForm):
 	class Meta:
 		model=Comment
 		fields=('author','text',)
+
+
+
+
+
+		# https://stackoverflow.com/questions/44837733/how-to-make-add-replies-to-comments-in-django/46992797   
+		# check this link for comment reply	

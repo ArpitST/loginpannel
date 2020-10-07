@@ -37,10 +37,37 @@ def post_list(request):
     posts=Post.objects.all().order_by('created_date')
     return render(request, 'blog/post_list.html',{'posts':posts})
 
-def post_detail(request,pk):
-    post=Post.objects.get(pk=pk)
-    return render(request, 'blog/post_detail.html',{'post':post})
+# def post_detail(request,pk):
+#     post=Post.objects.get(pk=pk)
+#     return render(request, 'blog/post_detail.html',{'post':post})
 
+#this one is for comment reply
+def post_detail(request,pk):
+    post = get_object_or_404(Post, pk=pk)
+    # comments = Comment.objects.filter(post=post, parent__isnull=True)
+    comments = Comment.objects.filter(post=post)
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            parent_obj = None
+            text=request.POST.get('text')
+            author = request.POST.get('author')
+            if parent_id:
+                print(parent_id)
+                parent_obj = Comment.objects.get(id=parent_id)
+            new_comment = comment_form.save(commit=False)
+            new_comment.parent = parent_obj
+            new_comment.post = post
+            new_comment.save()
+            return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        comment_form = CommentForm()
+    return render(request,
+                  'blog/post_detail.html',
+                  {'post': post,
+                   'comments': comments,
+                   'comment_form': comment_form})
+#which finish here
 
 class AddCategoryView():
     model=Category
@@ -70,7 +97,6 @@ def comment_approve(request,pk):
     comment=get_object_or_404(Comment,pk=pk)
     comment.approve()
     return redirect('blog/post_detail.html',pk=comment.post.pk)
-
 
 def comment_remove(request,pk):
     comment=get_object_or_404(Comment,pk=pk)

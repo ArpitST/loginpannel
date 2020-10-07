@@ -10,6 +10,8 @@ urlpatterns=[
 	path('comment/<int:pk>/approve/', views.comment_approve, name="comment_approve"),
 	path('comment/<int:pk>/remove/', views.comment_remove, name="comment_remove"),
 
+	# path('comment/<int:pk>/reply/', views.reply, name="reply"),
+
 	path('tags/',views.tags_list, name="tags_list_url"), 
 	path('tag/<str:slug>/',views.tag_detail, name="tag_detail_url"),
 

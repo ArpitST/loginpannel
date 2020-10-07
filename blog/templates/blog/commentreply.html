@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+{% for comment in post.comments.all %}
+ <ul>
+  {{ comment.text }}
+  {% for reply in comment.replies.all %}
+      <li>
+          {{ reply.text }}
+      </li>
+  {% endfor %}
+ </ul>
+ {% endfor %}
+
+ {% endblock %}

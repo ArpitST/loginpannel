@@ -3,14 +3,22 @@ from django.db import models
 from django.utils import timezone
 from django_extensions.db.fields import AutoSlugField
 
-
 class Category(models.Model):
 	name=models.CharField(max_length=200)
 
 	def __str__(self):
 		return self.name
 
-		
+class Tag(models.Model):
+	title=models.CharField(max_length=150)
+	
+
+	def __str__(self):
+		return self.title
+
+	def get_absolute_url(self):
+		return reverse('blog/tag_detail_url', kwargs={'slug':self.slug})
+
 class Post(models.Model):
 	author=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	title=models.CharField(max_length=200)
@@ -21,7 +29,7 @@ class Post(models.Model):
 	
 	category=models.CharField(max_length=200, default='coding')
 
-	tags=models.ManyToManyField('Tag', blank=True, related_name='posts')
+	tags=models.ManyToManyField(Tag, blank=True, related_name='posts')
 
 	def publish(self):
 		self.published_date=timezone.now()
@@ -51,13 +59,3 @@ class Comment(models.Model):
 
 	def approved_comments(self):
 		return self.comments.filter(approved_comments=True)
-
-class Tag(models.Model):
-	title=models.CharField(max_length=150)
-
-	def __str__(self):
-		return self.title
-
-	def get_absolute_url(self):
-		return reverse('blog/tag_detail_url', kwargs={'slug':self.slug})
-		
