@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Category, Comment
+from .models import Post, Category, Comment, Tag
 
 # choices=[('coding','coding'),('sports','sports'),('entertainment','entertainment')]
 choices=Category.objects.all().values_list('name','name')
@@ -27,7 +27,13 @@ class CommentForm(forms.ModelForm):
 		model=Comment
 		fields=('author','text',)
 
+						
 
+# class TagForm(forms.ModelForm):
+
+# 	class Meta:
+# 		model=Tag
+# 		fields=('name', 'text',)
 
 
 

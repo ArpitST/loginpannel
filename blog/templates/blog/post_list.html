@@ -8,6 +8,8 @@
 				{{ post.published_date }}
 			</div>	
 				<h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+				{% load static %}	
+				<img src="{{ post.thumbnail_Image.url }}">{{ post.media }}<br>
 				<p>{{ post.text | linebreaksbr }}</p>
 				<a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
 				<br>
