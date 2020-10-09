@@ -2,6 +2,8 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django_extensions.db.fields import AutoSlugField
+#below line is for showing view on site butt on admin
+from django.urls import reverse
 
 class Category(models.Model):
     name=models.CharField(max_length=200)
@@ -41,7 +43,9 @@ class Post(models.Model):
 
     def slugify_function(self,content):
         return content.replace('_', '-').lower()
-
+    #for showing button of view on site at admin    
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])    
 
 class Comment(models.Model):
     post=models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
