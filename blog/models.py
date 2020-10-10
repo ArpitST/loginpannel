@@ -31,7 +31,7 @@ class Post(models.Model):
     published_date=models.DateTimeField(blank=True, null=True)
     slug=AutoSlugField(populate_from='title', editable=True)
     category=models.CharField(max_length=200, default='coding')
-    tags=models.ManyToManyField(Tag, blank=True, related_name='posts')
+    tags=models.ManyToManyField(Tag, blank=True, related_name='posts',)
 
 
     def publish(self):
